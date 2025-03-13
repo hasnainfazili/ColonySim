@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class WorkerEvents
 {
-    public event Action<Worker> OnWorkerAssigned;
-    public event Action<Worker> OnWorkerRemoved;
+    public event Action<WorkerAI> OnWorkerAssigned;
+    public event Action<WorkerAI> OnWorkerRemoved;
 
 
-    public void WorkerAssigned(Worker worker)
+    public void WorkerAssigned(WorkerAI worker)
     {
         OnWorkerAssigned?.Invoke(worker);
     }
     
     
-    public void WorkerRemoved(Worker worker)
+    public void WorkerRemoved(WorkerAI worker)
     {
         OnWorkerRemoved?.Invoke(worker);
     }

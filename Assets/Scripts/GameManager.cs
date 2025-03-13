@@ -7,10 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public WorkersManager workersManager;
     //Temp
-    public List<Worker> AvailableWorkerList = new List<Worker>();
     private void Awake()
     {
         Instance = this;
+        workersManager =  WorkersManager.Instance;
     }
 }

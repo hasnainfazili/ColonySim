@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class ResourcePoint : MonoBehaviour
 {
-    [SerializeField] private GameObject WorkerNamePrefab;
-    [SerializeField] private Transform ListParent;
     
     
     private string resourcePointName;
@@ -19,8 +17,8 @@ public class ResourcePoint : MonoBehaviour
     private GatherableType gatherableType;
 
     public ResourcePointScriptable resourcePointScriptable;
-    // public float gatherableResourceAmount;
-    public List<GameObject> WorkersOnResource = new List<GameObject>();
+    public float gatherableResourceAmount;
+    public List<WorkerAI> WorkersOnResource = new List<WorkerAI>();
     private void OnEnable()
     {
         EventManager.Instance.WorkerEvents.OnWorkerAssigned += WorkerAssigned;
@@ -28,6 +26,12 @@ public class ResourcePoint : MonoBehaviour
 
     }
     
+    private void OnDisable()
+    {
+        EventManager.Instance.WorkerEvents.OnWorkerAssigned -= WorkerAssigned;
+        EventManager.Instance.WorkerEvents.OnWorkerRemoved -= WorkerRemoved;
+
+    }
 
     private void OnMouseDown()
     {
@@ -42,6 +46,10 @@ public class ResourcePoint : MonoBehaviour
         EventManager.Instance.MenuCardEvents.ResourcePointHover(resourcePointScriptable);
     }
 
+    private void Update()
+    {
+       GatherResource();
+    }
     private void InitializeResourcePoint()
     {
             resourcePointName = resourcePointScriptable.pointName;
@@ -53,27 +61,20 @@ public class ResourcePoint : MonoBehaviour
 
             if (WorkersOnResource.Count != 0)
             {
-                foreach (GameObject worker in WorkersOnResource)
+                foreach (WorkerAI worker in WorkersOnResource)
                 {
-                    var workerName = Instantiate(WorkerNamePrefab, ListParent, false);
-                    workerName.GetComponent<TextMeshProUGUI>().text = worker.name;
-                    workerName.name = worker.name;
+                    worker.transform.SetParent(transform);
                 }
             }
     }
-
-    private void WorkerAssigned(Worker worker)
+    
+    private void WorkerAssigned(WorkerAI worker)
     {
-        var workerName = Instantiate(WorkerNamePrefab, ListParent, false);
-        workerName.GetComponent<TextMeshProUGUI>() .text= worker.name;
-        WorkersOnResource.Add(workerName);                
-        workerName.name = worker.name;
-
-        //WorkerAssigned Also Sets NavMeshAgent to ResourcePoint
-        //Gathering Resources will start once the worker reaches the resource
+        worker.AssignedToResource(transform);
+        //Create a UI Element fot the Worker
     }
 
-    private void WorkerRemoved(Worker worker)
+    private void WorkerRemoved(WorkerAI worker)
     {
         for (var i = 0; i < WorkersOnResource.Count; i++)
         {
@@ -81,17 +82,37 @@ public class ResourcePoint : MonoBehaviour
             WorkersOnResource.Remove(WorkersOnResource[i]);
             Destroy(WorkersOnResource[i]);
         }        
-        //Destroy When Worker Remove Called
     }
     
-    public void GatherResource()
+    private void GatherResource()
     {
-        //Also Calculated by which worker is assigned 
-        // if (gatherableResourceAmount > 0)
-        // {
-        //     //Check if workers are assigned
-        //     //Depending on the amount of workers speed of resource gathered
-        //     //if resourceAmount reaches zero deassign workers and remove gameObject CLEANUP
-        // }
+        
+        if (gatherableResourceAmount > 0)
+        {
+            if (WorkersOnResource.Count > 0)
+            {
+                foreach (var t in WorkersOnResource)
+                {
+                    if(t.HasReachedResource())
+                        WorkersOnResource.Add(t);
+                }
+            }
+            gatherableResourceAmount -= (.5f * WorkersOnResource.Count);
+            if (!isGatherableGenerator)
+            {
+                if (gatherableResourceAmount < 0)
+                {
+                    DestroyResource();
+                }
+            }
+        }
+    }
+
+    private void DestroyResource()
+    {
+        foreach (var w in WorkersOnResource)
+        {
+            EventManager.Instance.WorkerEvents.WorkerRemoved(w);
+        }
     }
 }
