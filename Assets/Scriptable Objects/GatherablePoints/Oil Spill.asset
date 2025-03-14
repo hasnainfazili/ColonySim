@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982c8e993cda46aa9933ccbf889c010c, type: 3}
   m_Name: Oil Spill
   m_EditorClassIdentifier: 
-  pointId: 0
-  pointName: 
-  pointDescription: 
+  pointName: Oil Spill
+  pointDescription: A spillage send in someone to collect before it goes to waste
   isGatherableGenerator: 0
-  pointSprite: {fileID: 0}
-  pointGatherableType: 0
+  pointSprite: {fileID: -555950616, guid: 57bfb51287135df4aba06bad1c0b52b9, type: 3}
+  pointGatherableType: 2

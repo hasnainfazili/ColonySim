@@ -1,16 +1,13 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WorkerUIHandler : MonoBehaviour
 {
     //This is the base which will spawn for each Worker 
-    [SerializeField] private GameObject WorkerUIPrefab;
+    [SerializeField] private WorkerUIPrefab workerUIPrefab;
     //WorkerName, Worker Type, Resource on which is working
     
     private void CreateWorkerUI(WorkerAI workerAI)
     {
-            WorkerUIPrefab = Instantiate(WorkerUIPrefab);
-            WorkerUIPrefab.GetComponentInChildren<TextMeshProUGUI>().text = workerAI.name;
             
     }
     

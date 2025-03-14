@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dea711aff7e4e058c0d47db37d680d5, type: 3}
   m_Name: John Doe
   m_EditorClassIdentifier: 
-  name: 
-  description: 
+  id: 322
+  name: Johnny
+  description: Handymany
   icon: {fileID: 0}
   type: 0

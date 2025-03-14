@@ -48,7 +48,7 @@ public class ResourcePoint : MonoBehaviour
 
     private void Update()
     {
-       GatherResource();
+       // GatherResource();
     }
     private void InitializeResourcePoint()
     {
@@ -80,33 +80,32 @@ public class ResourcePoint : MonoBehaviour
         {
             if (WorkersOnResource[i].name != worker.name) continue;
             WorkersOnResource.Remove(WorkersOnResource[i]);
-            Destroy(WorkersOnResource[i]);
         }        
     }
     
-    private void GatherResource()
-    {
-        
-        if (gatherableResourceAmount > 0)
-        {
-            if (WorkersOnResource.Count > 0)
-            {
-                foreach (var t in WorkersOnResource)
-                {
-                    if(t.HasReachedResource())
-                        WorkersOnResource.Add(t);
-                }
-            }
-            gatherableResourceAmount -= (.5f * WorkersOnResource.Count);
-            if (!isGatherableGenerator)
-            {
-                if (gatherableResourceAmount < 0)
-                {
-                    DestroyResource();
-                }
-            }
-        }
-    }
+    // private void GatherResource()
+    // {
+    //     
+    //     if (gatherableResourceAmount > 0)
+    //     {
+    //         if (WorkersOnResource.Count > 0)
+    //         {
+    //             foreach (var t in WorkersOnResource)
+    //             {
+    //                 if(t.HasReachedResource())
+    //                     WorkersOnResource.Add(t);
+    //             }
+    //         }
+    //         gatherableResourceAmount -= (.5f * WorkersOnResource.Count);
+    //         if (!isGatherableGenerator)
+    //         {
+    //             if (gatherableResourceAmount < 0)
+    //             {
+    //                 DestroyResource();
+    //             }
+    //         }
+    //     }
+    // }
 
     private void DestroyResource()
     {

@@ -11,9 +11,9 @@ public class WorkersManager : MonoBehaviour
     private int _handymanWorkers;
     private int _smartypantWorkers;
 
-    private List<WorkerAI> AllWorkers = new List<WorkerAI>();
-    private List<WorkerAI> AvailableWorkers = new List<WorkerAI>();
-    private List<WorkerAI> AssignedWorkers = new List<WorkerAI>();
+    [SerializeField] private List<WorkerAI> AllWorkers = new List<WorkerAI>();
+    [SerializeField] private List<WorkerAI> AvailableWorkers = new List<WorkerAI>();
+    [SerializeField] private List<WorkerAI> AssignedWorkers = new List<WorkerAI>();
     public void Awake()
     {
         if (Instance != null)

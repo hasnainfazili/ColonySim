@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public WorkersManager workersManager;
+    public static WorkersManager workersManager;
+    public static GatherablesManager gatherablesManager;
     //Temp
     private void Awake()
     {
         Instance = this;
         workersManager =  WorkersManager.Instance;
+        gatherablesManager =  GatherablesManager.Instance;
     }
 }

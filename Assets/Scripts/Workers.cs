@@ -18,11 +18,4 @@ public class Workers
         this.Type = worker.type;
       
     }
-   
-}
-
-public enum WorkerType
-{
-    Handyman,
-    Smartypants
 }
