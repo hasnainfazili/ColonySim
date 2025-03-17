@@ -2,6 +2,8 @@
 
 public class ButtonEventHandler : MonoBehaviour
 {
+    
+    //This could be an interface?
     public void WorkerAdded()
     {
         EventManager.Instance.WorkerEvents.WorkerAssigned(
@@ -13,4 +15,4 @@ public class ButtonEventHandler : MonoBehaviour
         EventManager.Instance.WorkerEvents.WorkerRemoved(
             GameManager.workersManager.GetAvailableWorkersList()[Random.Range(0, GameManager.workersManager.GetAvailableWorkersList().Count)]);;
     }
-}
+}/**/

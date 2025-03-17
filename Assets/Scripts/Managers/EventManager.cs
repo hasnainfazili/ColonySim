@@ -6,6 +6,7 @@ public class EventManager : MonoBehaviour
 
     public MenuCardEvents MenuCardEvents;
     public WorkerEvents WorkerEvents;
+    public static GatherableEvents GatherableEvents;
     public void Awake()
     {
         if (Instance != null)
@@ -15,6 +16,7 @@ public class EventManager : MonoBehaviour
         Instance = this;
         MenuCardEvents = new MenuCardEvents();
         WorkerEvents = new WorkerEvents();
+        GatherableEvents = new GatherableEvents();
     }
 
 }
