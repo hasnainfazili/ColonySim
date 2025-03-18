@@ -16,4 +16,9 @@ public class GameManager : MonoBehaviour
         workersManager =  WorkersManager.Instance;
         gatherablesManager =  GatherablesManager.Instance;
     }
+
+    private void GameTimeTick()
+    {
+
+    }
 }

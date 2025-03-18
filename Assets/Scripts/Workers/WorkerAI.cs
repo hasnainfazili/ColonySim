@@ -41,7 +41,6 @@ public class WorkerAI : MonoBehaviour
         {
             var target = Vector3.Distance(transform.position, assignedResource.position);
             hasReachedResource = target <= workerAgent.stoppingDistance;
-            if(hasReachedResource) print(worker.name + " has reached resource");
             return hasReachedResource;
         }
         return false;
