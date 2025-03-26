@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResourcePoint : MonoBehaviour
+public class ResourcePoint : MonoBehaviour, IGatherable
 {
     
     
@@ -14,7 +14,7 @@ public class ResourcePoint : MonoBehaviour
     private string description;
     private bool isGatherableGenerator;
     private Image icon;
-    private GatherableType gatherableType;
+    private GatherableType _gatherableType;
 
     public ResourcePointScriptable resourcePointScriptable;
     public float gatherableResourceAmount;
@@ -48,14 +48,19 @@ public class ResourcePoint : MonoBehaviour
 
     private void Update()
     {
-       // GatherResource();
+       if(WorkersOnResource.Count > 0) Gather(_gatherableType , gatherableResourceAmount, WorkersOnResource.Count);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Worker")) WorkersOnResource.Add(other.GetComponent<WorkerAI>());
     }
     private void InitializeResourcePoint()
     {
             resourcePointName = resourcePointScriptable.pointName;
             description = resourcePointScriptable.pointDescription;
             isGatherableGenerator = resourcePointScriptable.isGatherableGenerator;
-            gatherableType = resourcePointScriptable.pointGatherableType;
+            _gatherableType = resourcePointScriptable.pointGatherableType;
             
             name = resourcePointName;
 
@@ -71,7 +76,7 @@ public class ResourcePoint : MonoBehaviour
     private void WorkerAssigned(WorkerAI worker)
     {
         worker.AssignedToResource(transform);
-        //Create a UI Element fot the Worker
+        //Create a UI Element for the Worker
     }
 
     private void WorkerRemoved(WorkerAI worker)
@@ -83,29 +88,6 @@ public class ResourcePoint : MonoBehaviour
         }        
     }
     
-    // private void GatherResource()
-    // {
-    //     
-    //     if (gatherableResourceAmount > 0)
-    //     {
-    //         if (WorkersOnResource.Count > 0)
-    //         {
-    //             foreach (var t in WorkersOnResource)
-    //             {
-    //                 if(t.HasReachedResource())
-    //                     WorkersOnResource.Add(t);
-    //             }
-    //         }
-    //         gatherableResourceAmount -= (.5f * WorkersOnResource.Count);
-    //         if (!isGatherableGenerator)
-    //         {
-    //             if (gatherableResourceAmount < 0)
-    //             {
-    //                 DestroyResource();
-    //             }
-    //         }
-    //     }
-    // }
 
     private void DestroyResource()
     {
@@ -113,5 +95,10 @@ public class ResourcePoint : MonoBehaviour
         {
             EventManager.Instance.WorkerEvents.WorkerRemoved(w);
         }
+    }
+
+    public void Gather(GatherableType gatherableType, float gatherAmount, int assignedWorkers)
+    {
+
     }
 }

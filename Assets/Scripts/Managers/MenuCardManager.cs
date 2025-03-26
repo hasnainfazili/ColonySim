@@ -4,7 +4,7 @@ using TMPro;
 public class MenuCardManager : MonoBehaviour
 {
     public GameObject MenuCardGO;
-    
+    public GameObject WorkersMenuCardGO;
     public TextMeshProUGUI cardTitleText;
     public TextMeshProUGUI cardDescriptionText;
     public Image cardSprite;

@@ -11,14 +11,14 @@ public class Player : MonoBehaviour
     public int SmartyPants;
     
     //Current Resources
-    private int OilGathered;
-    private int SteelGathered;
-    private int WoodGathered;
+    private int OilGathered = 0; //Later on use JSON to save
+    private int SteelGathered = 0;
+    private int WoodGathered = 0;
     
     //Total Resource Storage
-    private int TotalOilStorage;
-    private int TotalSteelStorage;
-    private int TotalWoodStorage;
+    private int TotalOilStorage = 999;
+    private int TotalSteelStorage = 999;
+    private int TotalWoodStorage = 999;
 
     private WorkersManager _workersManager;
     private GatherablesManager _gatherablesManager;
@@ -37,11 +37,6 @@ public class Player : MonoBehaviour
         OilGathered = _gatherablesManager.GetOilGathered();
         SteelGathered = _gatherablesManager.GetSteelGathered();
         WoodGathered = _gatherablesManager.GetWoodGathered();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
    
