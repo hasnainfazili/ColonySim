@@ -14,12 +14,12 @@ public class UIHandler : MonoBehaviour
         EventManager.GatherableEvents.OnGathered += UpdateGatherableUI;
     }
 
-    private void Awake()
+    private void Start()
     {
-        foreach (var worker in GameManager.workersManager.GetAvailableWorkersList())
-        {
-            CreateWorkerMenuItem(worker.GetWorker(), menuItemPrefab, workerListParent);
-        }
+            foreach (var w in WorkersManager.Instance.GetAvailableWorkersList())
+            {
+                CreateWorkerMenuItem(w.GetWorker(), menuItemPrefab, workerListParent);
+            }
     }
 
 
@@ -28,10 +28,10 @@ public class UIHandler : MonoBehaviour
         // if (gatherable.type == gatherable.GetType()) OilGathered.text = gatherable.name;
     }
 
-    public void CreateWorkerMenuItem<T>(T typeToCreate, MenuItemPrefab menuItemPrefab, Transform parentTransform) where T : Worker
+    private static void CreateWorkerMenuItem<T>(T typeToCreate, MenuItemPrefab itemPrefab, Transform parentTransform) where T : Worker
     {
-        var createdMenu = Instantiate(menuItemPrefab, parentTransform);
-        createdMenu.GetComponent<MenuItemPrefab>().Create(typeToCreate.name, typeToCreate.description, typeToCreate.icon);
+        var createdMenu = Instantiate(itemPrefab, parentTransform);
+        createdMenu.GetComponent<MenuItemPrefab>().Create(typeToCreate.name, typeToCreate.type.ToString(), typeToCreate.icon);
     }
     
 }

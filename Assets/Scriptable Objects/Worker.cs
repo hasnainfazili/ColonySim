@@ -9,3 +9,4 @@ public class Worker : ScriptableObject
     public  Sprite icon;
     public WorkerType type;
 }
+

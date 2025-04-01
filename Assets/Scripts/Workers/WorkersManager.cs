@@ -22,10 +22,27 @@ public class WorkersManager : MonoBehaviour
         }
         Instance = this;
 
-        AvailableWorkers = AllWorkers;
+        if (AllWorkers.Count != 0)
+        {
+            foreach (var worker in AllWorkers)
+            {
+                if (!worker.isAssigned)
+                {
+                    AvailableWorkers.Add(worker);
+                }
+            
+            }
+        }
     }
 
-
+    public void Start()
+    {
+        
+    }
+    public void AddWorkerToList(WorkerAI worker, List<WorkerAI> addToList)
+    {
+    
+    }
 
     #region Get for All Workers
 

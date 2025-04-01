@@ -19,25 +19,7 @@ public class Player : MonoBehaviour
     private int TotalOilStorage = 999;
     private int TotalSteelStorage = 999;
     private int TotalWoodStorage = 999;
-
-    private WorkersManager _workersManager;
-    private GatherablesManager _gatherablesManager;
-    void Awake()
-    {
-        _workersManager = GameManager.workersManager;
-        _gatherablesManager = GameManager.gatherablesManager;
-    }
-
-    void Start()
-    {
-        TotalWorkers = _workersManager.GetTotalWorkers();
-        Handymans = _workersManager.GetHandymanWorkers();
-        SmartyPants = _workersManager.GetSmartypantWorkers();
-        
-        OilGathered = _gatherablesManager.GetOilGathered();
-        SteelGathered = _gatherablesManager.GetSteelGathered();
-        WoodGathered = _gatherablesManager.GetWoodGathered();
-    }
-
+    
+    
    
 }

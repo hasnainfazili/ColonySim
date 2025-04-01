@@ -9,6 +9,7 @@ public class WorkerAI : MonoBehaviour
     //TEMP For testing
     public Transform RestAreaTransform;
     private Transform assignedResource;
+    public bool isAssigned;
     private void OnEnable()
     {
         name = worker.name;
@@ -16,6 +17,7 @@ public class WorkerAI : MonoBehaviour
     private void Start()
     {
         workerAgent = GetComponent<NavMeshAgent>();
+        if(assignedResource == null) isAssigned = false;
     }
     
     public void AssignedToResource(Transform resource)
